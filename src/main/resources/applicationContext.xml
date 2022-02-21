@@ -10,6 +10,6 @@
     <bean class="com.mycompany.dvdstore.controller.MovieController">
         <property name="movieService" ref="movieService"/>
     </bean>
-    <bean id="movieRepository" class="com.mycompany.dvdstore.repository.FileMovieRepository"/>
+    <bean id="movieRepository" class="com.mycompany.dvdstore.repository.MemoryMovieRepository"/>
 
 </beans>
