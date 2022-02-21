@@ -5,14 +5,23 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileMovieRepository implements MovieRepositoryInterface {
+    FileWriter file;
+
+    public FileWriter getFile() {
+        return file;
+    }
+
+    public void setFile(FileWriter file) {
+        this.file = file;
+    }
 
     public void add(Movie movie){
 
-        FileWriter writer;
+
         try{
-            writer=new FileWriter("C:\\tempHelayah\\movies.txt",true);
-            writer.write(movie.getTitle()+";"+movie.getGenre()+"\n");
-            writer.close();
+            file=new FileWriter("C:\\temp\\movies.csv",true);
+            file.write(movie.getTitle()+";"+movie.getGenre()+"\n");
+            file.close();
         }
         catch (IOException e){
             e.printStackTrace();
