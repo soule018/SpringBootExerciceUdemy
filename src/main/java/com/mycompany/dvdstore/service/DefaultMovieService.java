@@ -2,10 +2,12 @@ package com.mycompany.dvdstore.service;
 
 import com.mycompany.dvdstore.entity.Movie;
 import com.mycompany.dvdstore.repository.MovieRepositoryInterface;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 public class DefaultMovieService implements MovieServiceInterface {
     //private MovieRepository movieRepository=new MovieRepository();
+    @Autowired
     private MovieRepositoryInterface movieRepository;
 
     public MovieRepositoryInterface getMovieRepository() {
