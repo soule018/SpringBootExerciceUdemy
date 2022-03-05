@@ -3,7 +3,7 @@ package com.mycompany.dvdstore.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
+//@Controller
 public class AboutUsController {
 
     @RequestMapping("/about-us")

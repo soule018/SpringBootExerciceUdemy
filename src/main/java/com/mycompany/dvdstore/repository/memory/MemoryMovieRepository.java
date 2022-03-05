@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Repository
+@Repository
 public class MemoryMovieRepository implements MovieRepositoryInterface {
 
     private static List<Movie>movies=new ArrayList<>();
@@ -20,5 +20,16 @@ public class MemoryMovieRepository implements MovieRepositoryInterface {
         System.out.println("The movie "+movie.getTitle()+" has been added.");
 
 
+    }
+
+    @Override
+    public List<Movie> list() {
+        Movie movieOne=new Movie();
+        movieOne.setTitle("Rasta Rocket");
+        movieOne.setGenre("Comédie");
+        Movie movieTwo=new Movie();
+        movieTwo.setTitle("Dracula");
+        movieTwo.setGenre("Horreur");
+        return List.of(movieOne,movieTwo);
     }
 }

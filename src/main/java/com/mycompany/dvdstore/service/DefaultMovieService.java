@@ -5,6 +5,8 @@ import com.mycompany.dvdstore.repository.MovieRepositoryInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DefaultMovieService implements MovieServiceInterface {
     //private MovieRepository movieRepository=new MovieRepository();
@@ -23,5 +25,10 @@ public class DefaultMovieService implements MovieServiceInterface {
         movieRepository.add(movie);
 
 
+    }
+
+    @Override
+    public List<Movie> getMovieList() {
+        return movieRepository.list();
     }
 }

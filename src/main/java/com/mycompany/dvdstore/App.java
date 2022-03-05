@@ -1,5 +1,6 @@
 package com.mycompany.dvdstore;
 
+import com.mycompany.dvdstore.controller.HomeController;
 import com.mycompany.dvdstore.controller.MovieController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,7 +20,7 @@ public class App
         //ApplicationContext context=new ClassPathXmlApplicationContext("applicationContext.xml");
         //ApplicationContext context=new AnnotationConfigApplicationContext(App.class);
         ApplicationContext context = SpringApplication.run(App.class,args);
-        MovieController movieController=context.getBean(MovieController.class);
+        HomeController movieController=context.getBean(HomeController.class);
         movieController.addUsingConsole();
 
 
