@@ -27,9 +27,20 @@ public class MemoryMovieRepository implements MovieRepositoryInterface {
         Movie movieOne=new Movie();
         movieOne.setTitle("Rasta Rocket");
         movieOne.setGenre("Comédie");
+        movieOne.setDescription("Rasta Rocket");
+        movieOne.setId(1L);
         Movie movieTwo=new Movie();
         movieTwo.setTitle("Dracula");
         movieTwo.setGenre("Horreur");
+        movieTwo.setId(2L);
+        movieTwo.setDescription("Dracula");
         return List.of(movieOne,movieTwo);
+    }
+
+    @Override
+    public Movie getById(long id) {
+        return movies.stream().
+                filter(m -> m.getId()==id).
+                findFirst().get();
     }
 }
