@@ -1,4 +1,5 @@
 package com.mycompany.dvdstore.repository.file;
+
 import com.mycompany.dvdstore.entity.Movie;
 import com.mycompany.dvdstore.repository.MovieRepositoryInterface;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,34 +9,28 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 //@Repository
 public class FileMovieRepository implements MovieRepositoryInterface {
 
     @Value("${movies.file.location}")
-    FileWriter file;
-
-    public FileWriter getFile() {
-        return file;
-    }
-
-    public void setFile(FileWriter file) {
-        this.file = file;
-    }
+    private File file;
 
     public void add(Movie movie){
 
+        long lastId=list().stream().map(Movie::getId).max(Long::compare).orElse(0L);
+        movie.setId(lastId+1);
 
+        FileWriter writer;
         try{
-
-            file=new FileWriter("C:\\temp\\movies.csv",true);
-            file.write(movie.getTitle()+";"+movie.getGenre()+"\n");
-            file.close();
+            writer=new FileWriter(file,true);
+            writer.write(movie.getId()+";"+movie.getTitle()+";"+movie.getGenre()+";"+movie.getDescription()+"\n");
+            writer.close();
         }
         catch (IOException e){
             e.printStackTrace();
         }
-
-
+        System.out.println("The movie "+movie.getTitle()+" has been added.");
     }
 
     @Override
@@ -43,17 +38,21 @@ public class FileMovieRepository implements MovieRepositoryInterface {
 
         List<Movie> movies=new ArrayList<>();
 
-        try(BufferedReader br = new BufferedReader(new FileReader(String.valueOf(file)))) {
+        try(BufferedReader br = new BufferedReader(new FileReader(file))) {
             for(String line; (line = br.readLine()) != null; ) {
                 final Movie movie=new Movie();
-                final String[] titreEtGenre = line.split("\\;");
-                movie.setTitle(titreEtGenre[0]);
-                movie.setGenre(titreEtGenre[1]);
+                final String[] allProperties = line.split("\\;");
+                movie.setId(Long.parseLong(allProperties[0]));
+                movie.setTitle(allProperties[1]);
+                movie.setGenre(allProperties[2]);
                 movies.add(movie);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NumberFormatException e) {
+            System.err.println("A movie from the file does not have a proper id");
             e.printStackTrace();
         }
         return movies;
@@ -63,7 +62,7 @@ public class FileMovieRepository implements MovieRepositoryInterface {
     public Movie getById(long id) {
         final Movie movie = new Movie();
         movie.setId(id);
-        try(BufferedReader br = new BufferedReader(new FileReader(String.valueOf(file)))) {
+        try(BufferedReader br = new BufferedReader(new FileReader(file))) {
             for(String line; (line = br.readLine()) != null; ) {
 
                 final String[] allProperties = line.split("\\;");
@@ -87,5 +86,13 @@ public class FileMovieRepository implements MovieRepositoryInterface {
         movie.setGenre("UNKNOWN");
         movie.setDescription("UNKNOWN");
         return movie;
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
     }
 }

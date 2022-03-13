@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public class MemoryMovieRepository implements MovieRepositoryInterface {
-    private static long lastNumber=0L;
+    public static long lastId=0L;
 
     private static List<Movie>movies=new ArrayList<>();
 
@@ -17,12 +17,18 @@ public class MemoryMovieRepository implements MovieRepositoryInterface {
     cette méthode consiste à ajouter ce film movie à la liste statique de films
      */
     public void add(Movie movie){
+        movie.setId(lastId++);
         movies.add(movie);
         System.out.println("The movie "+movie.getTitle()+" has been added.");
-
-
     }
-
+/*
+    public Movie add(Movie movie){
+        movie.setId(lastId++);
+        movies.add(movie);
+        System.out.println("The movie "+movie.getTitle()+" has been added.");
+        return movie;
+    }*/
+    /*
     @Override
     public List<Movie> list() {
         Movie movieOne=new Movie();
@@ -36,6 +42,11 @@ public class MemoryMovieRepository implements MovieRepositoryInterface {
         movieTwo.setId(2L);
         movieTwo.setDescription("Dracula");
         return List.of(movieOne,movieTwo);
+    }*/
+
+    @Override
+    public List<Movie> list() {
+        return movies;
     }
 
     @Override
