@@ -6,10 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class DefaultMovieService implements MovieServiceInterface {
-    //private MovieRepository movieRepository=new MovieRepository();
+public class DefaultMovieService implements MovieServiceInterface{
+
     @Autowired
     private MovieRepositoryInterface movieRepository;
 
@@ -22,19 +23,17 @@ public class DefaultMovieService implements MovieServiceInterface {
     }
 
     public Movie registerMovie(Movie movie){
-        movieRepository.add(movie);
-        return movie;
-
-
+        return movieRepository.save(movie);
     }
 
     @Override
-    public List<Movie> getMovieList() {
-        return movieRepository.list();
+    public Iterable<Movie> getMovieList() {
+        return movieRepository.findAll();
     }
 
     @Override
     public Movie getMovieById(long id) {
-        return movieRepository.getById(id);
+        return movieRepository.findById(id).orElseThrow();
     }
 }
+

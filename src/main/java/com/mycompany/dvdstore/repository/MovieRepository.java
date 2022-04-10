@@ -1,5 +1,5 @@
 package com.mycompany.dvdstore.repository;
-
+/*
 import com.mycompany.dvdstore.entity.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,7 +10,8 @@ import org.springframework.stereotype.Repository;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
-
+*/
+/*
 @Repository
 public class MovieRepository implements MovieRepositoryInterface{
     @Autowired
@@ -18,6 +19,7 @@ public class MovieRepository implements MovieRepositoryInterface{
     JdbcTemplate va exploiter la dataSource dont a indiquer les propriétés dans le fichier,
     application.properties, va recupérer une connexion et gérer toutes les potentielles erreurs
      */
+/*
     private JdbcTemplate jdbcTemplate;
 
 
@@ -42,6 +44,7 @@ public class MovieRepository implements MovieRepositoryInterface{
     /*
     Cette méthode retourne la liste des films de la base de donnée
      */
+/*
     @Override
     public List<Movie> list() {
 
@@ -59,3 +62,4 @@ public class MovieRepository implements MovieRepositoryInterface{
 
 
 }
+*/
