@@ -1,14 +1,17 @@
 package com.mycompany.dvdstore.entity;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Table;
 
-@Table("MOVIE")
+import javax.persistence.*;
+
+@Entity
+@Table(name="movie")
 public class Movie {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition="BIGINT")
+    Long id;
     String title;
     String genre;
-    @Id
-    Long id;
     String description;
 
     public Movie(String title, String genre, Long id) {
